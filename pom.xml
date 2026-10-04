@@ -51,6 +51,17 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>songoda-public</id>
+            <url>https://repo.songoda-reborn.com/repository/maven-public/</url>
+        </repository>
+        <snapshotRepository>
+            <id>songoda-public</id>
+            <url>https://repo.songoda-reborn.com/repository/maven-public/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <dependencies>
         <!-- Dev dependencies -->
         <dependency>

@@ -157,8 +157,8 @@ public class EpicHoppers extends SongodaPlugin {
             long start = System.currentTimeMillis();
             this.hopperManager.addHoppers(this.dataManager.loadBatch(HopperImpl.class, "placed_hoppers"));
             this.boostManager.loadBoosts(this.dataManager.loadBatch(BoostDataImpl.class, "boosted_players"));
-            getLogger().info("Loaded " + hopperManager.getHoppers().size() + " hoppers in " + (System.currentTimeMillis() - start) + "ms");
             this.hopperManager.setReady();
+            getLogger().info("Loaded " + hopperManager.getHoppers().size() + " hoppers in " + (System.currentTimeMillis() - start) + "ms");
         });
     }
 
