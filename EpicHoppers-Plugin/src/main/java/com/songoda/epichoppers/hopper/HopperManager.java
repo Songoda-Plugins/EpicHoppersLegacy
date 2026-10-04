@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class HopperManager {
+public class HopperManager implements IHopperManager {
     private final Map<Location, HopperImpl> registeredHoppers = new HashMap<>();
     private final EpicHoppers plugin;
 
@@ -94,6 +94,51 @@ public class HopperManager {
         return this.registeredHoppers.get(location);
     }
 
+    @Override
+    public Hopper addHopperAt(Location location, UUID createFor) throws IllegalStateException {
+        if (!this.ready) {
+            throw new IllegalStateException("Hoppers are still being loaded");
+        }
+
+        HopperImpl hopper = new HopperImpl(location, createFor);
+        this.registeredHoppers.put(roundLocation(location), hopper);
+        this.plugin.getDataManager().save(hopper);
+        return hopper;
+    }
+
+    @Override
+    public Hopper removeHopperAt(Location location) throws IllegalStateException {
+        if (!this.ready) {
+            throw new IllegalStateException("Hoppers are still being loaded");
+        }
+        HopperImpl hopper = this.registeredHoppers.get(roundLocation(location));
+        if (hopper == null) {
+            return null;
+        }
+        return this.removeHopper(roundLocation(location));
+    }
+
+    @Override
+    public Hopper getHopperAt(Location location) throws IllegalStateException {
+        if (!this.ready) {
+            throw new IllegalStateException("Hoppers are still being loaded");
+        }
+        return this.registeredHoppers.get(roundLocation(location));
+    }
+
+    @Override
+    public Hopper getHopperAt(Location location, UUID createForIfNotExists) throws IllegalStateException {
+        if (!this.ready) {
+            throw new IllegalStateException("Hoppers are still being loaded");
+        }
+
+        Hopper hopper = this.registeredHoppers.get(roundLocation(location));
+        if (hopper == null) {
+            return this.getHopper(location, createForIfNotExists);
+        }
+        return hopper;
+    }
+
     public HopperImpl getHopper(Block block, UUID createForIfNotExists) {
         return getHopper(block.getLocation(), createForIfNotExists);
     }
@@ -101,11 +146,21 @@ public class HopperManager {
     /**
      * <em>Returns {@code false} if {@link #isReady()} is false too</em>
      */
-    public boolean isHopper(Location location) {
+    @Override
+    public boolean isHopper(Location location) throws IllegalStateException {
+        if (!this.ready) {
+            throw new IllegalStateException("Hoppers are still being loaded");
+        }
+
         return this.registeredHoppers.containsKey(roundLocation(location));
     }
 
-    public Map<Location, HopperImpl> getHoppers() {
+    @Override
+    public Map<Location, HopperImpl> getHoppers() throws IllegalStateException {
+        if (!this.ready) {
+            throw new IllegalStateException("Hoppers are still being loaded");
+        }
+
         return Collections.unmodifiableMap(this.registeredHoppers);
     }
 

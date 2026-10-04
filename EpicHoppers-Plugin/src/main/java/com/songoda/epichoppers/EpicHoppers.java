@@ -130,7 +130,7 @@ public class EpicHoppers extends SongodaPlugin {
         pluginManager.registerEvents(new InteractListeners(this), this);
         pluginManager.registerEvents(new InventoryListeners(), this);
 
-        EpicHoppersApi.initApi(this.levelManager, this.boostManager, this.containerManager, this.teleportHandler, this.playerDataManager);
+        EpicHoppersApi.initApi(this.levelManager, this.boostManager, this.containerManager, this.teleportHandler, this.playerDataManager, this.hopperManager);
 
         // Start auto save
         int saveInterval = Settings.AUTOSAVE.getInt() * 60 * 20;

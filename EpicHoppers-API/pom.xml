@@ -4,11 +4,11 @@
     <parent>
         <groupId>com.songoda</groupId>
         <artifactId>EpicHoppers-Parent</artifactId>
-        <version>6.9.0</version>
+        <version>6.9.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>EpicHoppers-API</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <build>
         <plugins>
