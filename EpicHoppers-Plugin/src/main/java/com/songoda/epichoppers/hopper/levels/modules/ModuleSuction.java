@@ -97,6 +97,12 @@ public class ModuleSuction extends Module {
                 return;
             }
 
+            // CRITICAL FIX: Prevent hoppers from being sucked by other hoppers
+            // This prevents the item loss bug when breaking multiple hoppers quickly
+            if (itemStack.getType() == Material.HOPPER) {
+                continue;
+            }
+
             if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName() &&
                     itemStack.getItemMeta().getDisplayName().startsWith("***")) {
                 return; //Compatibility with Shop instance: https://www.spigotmc.org/resources/shop-a-simple-intuitive-shop-instance.9628/
