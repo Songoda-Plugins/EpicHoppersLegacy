@@ -30,7 +30,7 @@ public class ContainerManagerImpl implements ContainerManager {
     @Override
     public void registerCustomContainerImplementation(String requiredPlugin, IContainer container) {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        if (requiredPlugin != null && pluginManager.isPluginEnabled(requiredPlugin)) {
+        if (requiredPlugin == null || pluginManager.isPluginEnabled(requiredPlugin)) {
             this.customContainers.add(container);
         }
     }
